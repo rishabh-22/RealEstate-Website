@@ -1,15 +1,10 @@
-from django.forms import ModelForm
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
 
-class UserForm(ModelForm):
-    class Meta:
-        model = User
-        fields = ['first_name', 'last_name', 'username', 'password', ]
-
-
-class ProfileForm(ModelForm):
+class UserForm(UserCreationForm):
     class Meta:
         model = Profile
-        fields = ['is_seller', 'description', 'profile_pic', 'email', ]
+        fields = ['username', 'first_name', 'last_name', 'email_id', 'password1', 'password2', 'is_seller', 'profile_pic', ]
+        # exclude = '__all__'
+

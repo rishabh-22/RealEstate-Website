@@ -1,7 +1,8 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 
-from .forms import UserForm, ProfileForm
+from .forms import UserForm
 
 # Create your views here.
 
@@ -9,19 +10,17 @@ from .forms import UserForm, ProfileForm
 @csrf_protect
 def index(request):
     user = UserForm()
-    profile = ProfileForm()
 
-    context = {'UserForm': user, 'ProfileForm': profile}
+    context = {'UserForm': user}
 
-    return render(request, 'index_page.html', context)
+    return render(request, 'registration_page.html', context)
 
 
 def post(request):
     if request.method == 'POST':
         user = UserForm()
-        profile = ProfileForm()
         if user.is_valid():
             user.save()
-        if profile.is_valid():
-            profile.save()
+        else:
+            return HttpResponse("invalid form!")
     return redirect('form')
