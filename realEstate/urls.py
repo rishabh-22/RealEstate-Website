@@ -19,7 +19,9 @@ from loginRegister import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('form/', views.index, name='form' ),
-    path('form/post', views.post, name='post')
+    path('register/', views.NewUser.as_view(), name='register'),
+    path('form/', views.index,),
+    path('login/', views.check_login, name='login'),
+    path('logout/', views.logout_user, name='logout')
 
 ]
