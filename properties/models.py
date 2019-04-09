@@ -44,3 +44,10 @@ class Property(models.Model):
 class PropertyImages(models.Model):
     property_name = models.ForeignKey(Property, related_name='property_name', on_delete=models.CASCADE)
     property_image = models.ImageField(upload_to='property/')
+
+
+class Enquiry(models.Model):
+    property = models.ForeignKey(Property, related_name='property', on_delete=models.CASCADE)
+    requester = models.ForeignKey(User, related_name='requester', on_delete=models.CASCADE)
+    enquiry_text = models.TextField(max_length=200)
+    enquiry_date = models.DateField(auto_now_add=True)

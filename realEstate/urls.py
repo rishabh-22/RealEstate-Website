@@ -15,19 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
 from loginRegister import views
 from django.conf.urls.static import static
 from django.conf import settings
 from properties import views as p_views
+import django_filters
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', views.NewUser.as_view(), name='register'),
-    path('form/', views.index,),
+    path('', views.index, name='homepage'),
     path('login/', views.check_login, name='login'),
     path('logout/', views.logout_user, name='logout'),
     path('profile/', views.Dashboard.as_view(), name='dashboard'),
     path('property/', p_views.CreateNewProperty.as_view(), name='property_featured'),
-    path('property/<int:id>/', p_views.ExistingProperty.as_view(), name='existing_property')
+    path('property/<int:id>/', p_views.ExistingProperty.as_view(), name='existing_property'),
+    path('search/', p_views.search, name='search'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

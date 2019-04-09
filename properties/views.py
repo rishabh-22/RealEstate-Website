@@ -4,6 +4,7 @@ from django.views import View
 from .forms import PropertyForm, PropertyImagesForm
 from .models import PropertyImages, Property
 from django.contrib import messages
+from .filters import PropertyFilter
 
 
 def check_session(request, *args):
@@ -97,6 +98,13 @@ class ExistingProperty(View):
             return HttpResponse('all set')
         else:
             return HttpResponse(form_data.errors)
+
+
+def search(request):
+    property_list = Property.objects.all()
+    property_filter = PropertyFilter(request.GET, queryset=property_list)
+    # import pdb; pdb.set_trace()
+    return render(request, 'property_search.html', {'filter': property_filter})
 
 
 class GetEnquiry(View):

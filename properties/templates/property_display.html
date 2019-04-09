@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Example of Bootstrap 3 Carousel</title>
+<title>Properties</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -58,5 +58,17 @@ Title:{{property.property_title}}<br>
     Area:{{property.property_sqFeet}}sq feet<br>
     Lot Size:{{property.property_lotSize}}<br>
     Garages:{{property.property_garage}}<br>
-    Description:{{property.property_description}}
+    Description:{{property.property_description}}<br>
+
+<!--{% block content %}-->
+<!--  <form method="get" action="{% url 'search' %}">-->
+<!--    {{ filter.form.as_p }}-->
+<!--    <input type="submit">Search</input>-->
+<!--  </form>-->
+<!--  <ul>-->
+<!--  {% for property in filter.qs %}-->
+<!--    <li>{{ property.property_title }}</li>-->
+<!--  {% endfor %}-->
+<!--  </ul>-->
+<!--{% endblock %}-->
 </html>
