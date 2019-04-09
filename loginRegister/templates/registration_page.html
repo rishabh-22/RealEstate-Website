@@ -36,7 +36,7 @@
                 <div class="card-heading"></div>
                 <div class="card-body">
                     <h2 class="title">Registration Info</h2>
-                    <form method="POST">
+                    <form method="POST" enctype="multipart/form-data">
                         {% for items in error.values %}
                         {{items}}
                         {% endfor %}

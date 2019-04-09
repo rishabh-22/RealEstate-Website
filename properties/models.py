@@ -1,12 +1,15 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 
 
 class Property(models.Model):
-    property_title = models.CharField(max_length=50, required=True)
+    property_owner = models.ForeignKey(User, related_name='property_owner', on_delete=models.CASCADE)
+    property_title = models.CharField(max_length=50)
     property_address = models.CharField(max_length=200)
-    property_city = (
+    PROPERTY_CITY_CHOICES = (
         ('New Delhi', 'New Delhi'),
         ('Noida', 'Noida'),
         ('Gurugram', 'Gurugram'),
@@ -16,7 +19,7 @@ class Property(models.Model):
         ('Mumbai', 'Mumbai'),
         ('Chennai', 'Chennai'),
     )
-    property_state = (
+    PROPERTY_STATE_CHOICES = (
         ('Delhi', 'Delhi'),
         ('Uttar Pradesh', 'Uttar Pradesh'),
         ('Haryana', 'Haryana'),
@@ -25,6 +28,8 @@ class Property(models.Model):
         ('Maharashtra', 'Maharashtra'),
         ('Tamil Nadu', 'Tamil Nadu'),
     )
+    property_city = models.CharField(max_length=50, choices=PROPERTY_CITY_CHOICES)
+    property_state = models.CharField(max_length=50, choices=PROPERTY_STATE_CHOICES)
     property_pin = models.IntegerField()
     property_price = models.IntegerField()
     property_bedrooms = models.IntegerField()
@@ -34,3 +39,8 @@ class Property(models.Model):
     property_garage = models.IntegerField()
     property_listingDate = models.DateField(auto_now_add=True)
     property_description = models.CharField(max_length=200)
+
+
+class PropertyImages(models.Model):
+    property_name = models.ForeignKey(Property, related_name='property_name', on_delete=models.CASCADE)
+    property_image = models.ImageField(upload_to='property/')
