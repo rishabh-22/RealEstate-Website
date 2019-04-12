@@ -103,8 +103,12 @@ class ExistingProperty(View):
 def search(request):
     property_list = Property.objects.all()
     property_filter = PropertyFilter(request.GET, queryset=property_list)
-    # import pdb; pdb.set_trace()
-    return render(request, 'property_search.html', {'filter': property_filter})
+
+    prop = property_filter.queryset
+    prop_images = [PropertyImages.objects.filter(property_name=props) for props in prop]
+
+    import pdb; pdb.set_trace()
+    return render(request, 'property_search.html', {'filter': property_filter, 'prop_images': prop_images})
 
 
 class GetEnquiry(View):

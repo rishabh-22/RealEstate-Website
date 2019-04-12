@@ -1,5 +1,5 @@
 import django_filters
-from .models import Property
+from .models import PropertyImages, Property
 
 
 class PropertyFilter(django_filters.FilterSet):
@@ -12,7 +12,7 @@ class PropertyFilter(django_filters.FilterSet):
         fields = {
             'property_title': ['icontains', ],
             'property_city': ['exact', ],
-            # 'property_state': ['exact', ],
+            'property_pin': ['exact', ],
             'property_bedrooms': ['exact', ],
             'property_bathrooms': ['exact', ],
             'property_garage': ['exact', ],

@@ -99,7 +99,6 @@ class Dashboard(View):
         if request.POST.get('update_profile_button'):
             return render(request, 'update_user.html', {'user': current_user})
         elif request.POST.get('update_profile'):
-            # return redirect('register')
             current_user.first_name = request.POST.get('first_name')
             current_user.last_name = request.POST.get('last_name')
             current_user.description = request.POST.get('description')
