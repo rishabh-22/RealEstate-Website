@@ -35,7 +35,7 @@
         <div class="top-header-area">
             <div class="h-100 d-md-flex justify-content-between align-items-center">
                 <div class="email-address">
-                    <a href="mailto:contact@southtemplate.com">contact@southtemplate.com</a>
+                    <a href="mailto:contact@southtemplate.com">contact@tothenew.com</a>
                 </div>
                 <div class="phone-number d-flex">
                     <div class="icon">
@@ -75,24 +75,24 @@
                             <ul>
 
 
-                                <li><a href="about-us.html">Featured Properties</a></li>
+                                <li><a href="{% url 'featured_properties' %}">Featured Properties</a></li>
                                 {% if request.session.logged_in %}
                                 <li><a class="waves-effect waves-dark" href="{% url 'dashboard' %}">
                                   {% if request.session.is_seller %}
-                                    {{request.session.user_first_name}}|Seller
+                                    {{request.user.first_name}}|Seller
                                 {% else %}
-                                    {{request.session.user_first_name}}|Buyer
+                                    {{request.user.first_name}}|Buyer
                                 {% endif %}
                             </a></li>
                                 {% if request.session.is_seller %}
-                            <li><a class="waves-effect waves-dark" href="{% url 'property_featured' %}">Post Property</a></li>
+                            <li><a class="waves-effect waves-dark" href="{% url 'property_add' %}">Post Property</a></li>
                         {% endif %}
                             <li><a class="waves-effect waves-dark" href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
                             <li><a class="waves-effect waves-dark" href="{% url 'register' %}">Register</a></li>
                             <li><a class="waves-effect waves-dark" href="{% url 'login' %}">Login</a></li>
                         {% endif %}
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="#">Contact</a></li>
                             </ul>
                         <!-- Nav End -->
                     </div>
@@ -357,7 +357,7 @@
                                     </div>
                                     <!-- Submit -->
                                     <div class="form-group mb-0">
-                                        <button type="submit" class="btn south-btn">Search</button>
+                                        <button type="submit" class="btn south-btn"><a href="{% url 'search' %}"></a>Search</button>
                                     </div>
                                 </div>
                             </div>
@@ -376,7 +376,6 @@
                 <div class="col-12">
                     <div class="section-heading wow fadeInUp">
                         <h2>Featured Properties</h2>
-                        <p>Suspendisse dictum enim sit amet libero malesuada feugiat.</p>
                     </div>
                 </div>
             </div>

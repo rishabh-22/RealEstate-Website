@@ -31,7 +31,6 @@ class NewUser(FormView):
     # success_url = '/success'
 
     def form_valid(self, form):
-        import pdb; pdb.set_trace()
         form.save()
         return HttpResponse('all set')
 
@@ -56,7 +55,7 @@ class Login(FormView):
             self.request.session['current_user'] = username
             self.request.session['is_seller'] = Profile.objects.get(username=username).is_seller
             # FIX this
-            return redirect('dashboard')
+            return redirect('homepage')
         else:
             messages.add_message(self.request, messages.INFO, "Invalid username/password")
             return redirect('login')

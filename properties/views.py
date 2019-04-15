@@ -109,7 +109,7 @@ class ExistingProperty(View):
 
 def show_property_for_seller(request, context, current_user, property_owner):
     if current_user == str(property_owner):
-        return render(request, 'property_owner_display.html', context=context)
+        return render(request, 'property_update.html', context=context)
     else:
         return render(request, 'property_display.html', context=context)
 
@@ -193,7 +193,7 @@ class UpdateProperty(UpdateView):
 
 class DeleteProperty(DeleteView):
     model = Property
-    template_name = 'property_confirm_delete.html'
+    template_name = 'property_delete.html'
     success_url = reverse_lazy('dashboard')
 
     def get(self, request, *args, **kwargs):
@@ -202,7 +202,7 @@ class DeleteProperty(DeleteView):
 
             current_property = Property.objects.get(pk=self.get_object().id)
             current_user = User.objects.get(username=self.request.session.get('current_user'))
-            if current_property.property_poster == current_user:
+            if current_property.property_owner == current_user:
                 return super().get(request, *args, **kwargs)
             else:
                 logout(self.request)
@@ -232,3 +232,38 @@ def handle_query(request, current_property, current_user, id):
     new_enquiry.enquiry_text = request.POST.get('query')
     new_enquiry.save()
     return redirect('existing_property', id=id)
+
+
+def featured_page(request):
+    """
+    Finds the top 3 properties from Property and send them to display
+    :param request:
+    :return: top 3 properties to display on the featured page
+    """
+
+    prop = []
+    prop_images = []
+    count = len(Property.objects.filter())
+    indexes = [i for i in range(count, count-3, -1)]
+    current_user = request.session.get('current_user', None)
+    user_name = ''
+    if current_user is not None:
+        user_name = User.objects.get(username=current_user).first_name
+    for i in indexes:
+        prop.append(Property.objects.get(pk=i))
+        # print(len(prop))
+        # print(len(prop)-1)
+        # print(prop[len(prop)-1])
+        # PropertyImages.objects.get(property_name=prop[len(prop)-1])
+        image = PropertyImages.objects.filter(property_name_id=prop[len(prop)-1].id)[0]
+        prop_images.append(image)
+    final_prop = zip(prop, prop_images)
+    return render(request, 'property_featured.html', {'property': prop,
+                                                      'property_images': prop_images,
+                                                      'range': range(1, 4),
+                                                      'final_property': final_prop,
+                                                      'logged_in': request.session.get('logged_in', None),
+                                                      'user_first_name': user_name,
+                                                      'is_seller': request.session.get('is_seller', False)
+                                                     })
+

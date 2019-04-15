@@ -15,32 +15,32 @@
 
 
 
-<div style="top:100px left:100px">
+<!--<div style="top:100px left:100px">-->
 
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="border:1px solid black; width:500px;height:200px;margin:0 auto; ">
+<!--    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="border:1px solid black; width:500px;height:200px;margin:0 auto; ">-->
 <!-- Indicators -->
 
-      <div class="carousel-inner" role="listbox">
-    {% for img in prop_images %}
-          {% for im in img %}
-  <div class="item{% if forloop.first %} active{% endif %}">
-  <img style="height:100%;max-height:500px;" src="{{im.property_image.url}}" alt="Image">
-  </div>
-          {% endfor %}
-  {%endfor%}
-    </div>
+<!--      <div class="carousel-inner" role="listbox">-->
+<!--    {% for img in prop_images %}-->
+<!--          {% for im in img %}-->
+<!--  <div class="item{% if forloop.first %} active{% endif %}">-->
+<!--  <img style="height:100%;max-height:500px;" src="{{im.property_image.url}}" alt="Image">-->
+<!--  </div>-->
+<!--          {% endfor %}-->
+<!--  {%endfor%}-->
+<!--    </div>-->
 
     <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
-</div>
+<!--    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">-->
+<!--        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>-->
+<!--        <span class="sr-only">Previous</span>-->
+<!--    </a>-->
+<!--    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">-->
+<!--        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>-->
+<!--        <span class="sr-only">Next</span>-->
+<!--    </a>-->
+<!--</div>-->
+<!--</div>-->
            {% for property in filter.qs %}
 
   <ul>
@@ -48,6 +48,8 @@
 
     <li>Title: {{ property.property_title }}</li>
     <li>Address: {{ property.property_address }}</li>
+    <li>City: {{property.property_city}}</li>
+    <li>State: {{property.property_state}}</li>
     <li>Pin Code: {{ property.property_pin }}</li>
     <li>Price: {{ property.property_price }}</li>
     <li>No. of bedrooms: {{ property.property_bedrooms }}</li>
