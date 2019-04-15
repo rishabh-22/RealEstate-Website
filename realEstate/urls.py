@@ -31,6 +31,9 @@ urlpatterns = [
     path('profile/', views.Dashboard.as_view(), name='dashboard'),
     path('property/', p_views.CreateNewProperty.as_view(), name='property_featured'),
     path('property/<int:id>/', p_views.ExistingProperty.as_view(), name='existing_property'),
+    path('delete/<int:pk>', p_views.DeleteProperty.as_view(), name='delete_property'),
+    path('update/<int:pk>', p_views.UpdateProperty.as_view(), name='update_property'),
+    path('queries/', views.queries, name='queries'),
     path('search/', p_views.search, name='search'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

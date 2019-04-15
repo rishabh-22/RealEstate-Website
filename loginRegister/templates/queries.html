@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Queries Made</title>
+</head>
+<body>
+            <div class="span3 well">
+            {% if queries_made %}
+                <h3 style="text-align:center">QUERIES MADE</h3>
+    {%for query in queries_made %}
+        <div style="width:1000px;height:40px;text-align:center;margin-left:150px">
+            <div style="width:200px;border-right:1px solid black;float:left;height:38px;padding-top:8px">
+                <a href = "{% url 'existing_property' id=query.property_id %}">{{query.property.property_title}}</a>
+            </div>
+            <div style="width:800px;float:left;padding-top:8px ">
+                {{query.enquiry_text}}
+            </div>
+        </div>
+        {% endfor %}
+{% else %}
+<h3 style="text-align:center">NO QUERIES MADE BY USER</h3>
+{% endif %}
+
+</body>
+</html>

@@ -40,7 +40,7 @@
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 							<ul class="nav navbar-nav menu_nav ml-auto">
-								<li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+								<li class="nav-item active"><a class="nav-link" href="{% url 'homepage' %}">Home</a></li>
 								<li class="nav-item"><a class="nav-link" href="about-us.html">Properties Posted</a></li>
                                 <li class="nav-item"><form method="POST">
                                     {% csrf_token %}
@@ -84,7 +84,7 @@
 
 									<h3>{{user.first_name}} {{user.last_name}}</h3>
 									<h4>{{user.username}}</h4>
-
+                                    <h4>SELLER</h4>
 									<ul class="list basic_info">
 <!--										<li><a href="#"><i class="lnr lnr-calendar-full"></i> 31st December, 1992</a></li>-->
 										<li><a href="#"><i class="lnr lnr-phone-handset"></i> {{user.phone_num}}</a></li>
@@ -105,7 +105,72 @@
             </div>
         </section>
         <!--================End Home Banner Area =================-->
+        <div class="container">
+<div class="span3 well">
+    {% if final_properties %}
+        <table>
+            <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Options</th>
+            </tr>
 
+                    {% for property in final_properties %}
+                        <tr style="height:150px">
+                            <td><img src="{{property.1.property_image.url}}" style="width:200px;height:130px;object-fit:cover;margin-left:8px"></td>
+                            <td> {{property.0.property_title}}</td>
+                            <td>{{property.0.property_description}}</td>
+                            <td>{{property.0.property_price}}</td>
+                             <td>
+                                <a href="{% url 'update_property' pk=property.0.id %}" style="text-decoration:none"><input type="submit" value="Update"></a>
+                                <a href="{% url 'delete_property' pk=property.0.id %}" style="text-decoration:none"><input type="submit" value="Delete"></a>
+                            </td>
+                        </tr>
+                     {% endfor %}
+        </table>
+    {% else %}
+        <h4>No properties posted yet</h4>
+    {% endif %}
+</div>
+</div>
+<div class="container">
+<div class="span3 well">
+{% if queries_for_seller %}
+    <center>
+        <h4>Queries Made by User</h4>
+
+    <table>
+        <tr>
+            <th>Buyer's email</th>
+            <th>Date</th>
+            <th>Property</th>
+            <th>Query</th>
+        </tr>
+    {% for queries in queries_for_seller %}
+        <tr>
+            <td>
+                {{queries.requester.email}}
+            </td>
+            <td>
+                {{queries.enquiry_date}}
+            </td>
+            <td>
+                {{queries.property.property_title}}
+            </td>
+            <td>
+                {{queries.enquiry_text}}
+            </td>
+        </tr>
+      {% endfor %}
+    </table>
+    </center>
+{% else %}
+    <h4>No queries made yet for your posted properties</h4>
+{% endif %}
+</div>
+</div>
         <!--================Welcome Area =================-->
 <!--        <section class="welcome_area p_120">-->
 <!--        	<div class="container">-->

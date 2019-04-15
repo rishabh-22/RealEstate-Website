@@ -53,15 +53,16 @@ Title:{{property.property_title}}<br>
     Garages:{{property.property_garage}}<br>
     Description:{{property.property_description}}<br>
 
-<!--{% block content %}-->
-<!--  <form method="get" action="{% url 'search' %}">-->
-<!--    {{ filter.form.as_p }}-->
-<!--    <input type="submit">Search</input>-->
-<!--  </form>-->
-<!--  <ul>-->
-<!--  {% for property in filter.qs %}-->
-<!--    <li>{{ property.property_title }}</li>-->
-<!--  {% endfor %}-->
-<!--  </ul>-->
-<!--{% endblock %}-->
+{% if logged_in %}
+    {% if is_buyer %}
+        {% if no_query_made %}
+            {% include 'enquiry_form.html' %}
+        {% else %}
+            You have already inquired for this form
+        {% endif %}
+    {% endif %}
+{% else %}
+    Login To Post A Query
+    <a href="{% url 'login' %}"><input type="submit" value="Login" style="decoration:none"></a>
+{% endif %}
 </html>

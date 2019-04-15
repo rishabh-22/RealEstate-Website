@@ -42,7 +42,7 @@
                         <img src="{% static 'img/icons/phone-call.png' %}" alt="">
                     </div>
                     <div class="number">
-                        <a href="tel:+45 677 8993000 223">+45 677 8993000 223</a>
+                        <a href="tel:+91 954 099 3336">+91 954 099 3336</a>
                     </div>
                 </div>
             </div>
@@ -73,80 +73,27 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="about-us.html">About Us</a></li>
-                                        <li><a href="#">Listings</a>
-                                            <ul class="dropdown">
-                                                <li><a href="listings.html">Listings</a></li>
-                                                <li><a href="single-listings.html">Single Listings</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Blog</a>
-                                            <ul class="dropdown">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="single-blog.html">Single Blog</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                        <li><a href="elements.html">Elements</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="about-us.html">About Us</a></li>
-                                <li><a href="listings.html">Properties</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="#">Mega Menu</a>
-                                    <div class="megamenu">
-                                        <ul class="single-mega cn-col-4">
-                                            <li class="title">Headline 1</li>
-                                            <li><a href="#">Mega Menu Item 1</a></li>
-                                            <li><a href="#">Mega Menu Item 2</a></li>
-                                            <li><a href="#">Mega Menu Item 3</a></li>
-                                            <li><a href="#">Mega Menu Item 4</a></li>
-                                            <li><a href="#">Mega Menu Item 5</a></li>
-                                        </ul>
-                                        <ul class="single-mega cn-col-4">
-                                            <li class="title">Headline 2</li>
-                                            <li><a href="#">Mega Menu Item 1</a></li>
-                                            <li><a href="#">Mega Menu Item 2</a></li>
-                                            <li><a href="#">Mega Menu Item 3</a></li>
-                                            <li><a href="#">Mega Menu Item 4</a></li>
-                                            <li><a href="#">Mega Menu Item 5</a></li>
-                                        </ul>
-                                        <ul class="single-mega cn-col-4">
-                                            <li class="title">Headline 3</li>
-                                            <li><a href="#">Mega Menu Item 1</a></li>
-                                            <li><a href="#">Mega Menu Item 2</a></li>
-                                            <li><a href="#">Mega Menu Item 3</a></li>
-                                            <li><a href="#">Mega Menu Item 4</a></li>
-                                            <li><a href="#">Mega Menu Item 5</a></li>
-                                        </ul>
-                                        <ul class="single-mega cn-col-4">
-                                            <li class="title">Headline 4</li>
-                                            <li><a href="#">Mega Menu Item 1</a></li>
-                                            <li><a href="#">Mega Menu Item 2</a></li>
-                                            <li><a href="#">Mega Menu Item 3</a></li>
-                                            <li><a href="#">Mega Menu Item 4</a></li>
-                                            <li><a href="#">Mega Menu Item 5</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
+
+
+                                <li><a href="about-us.html">Featured Properties</a></li>
+                                {% if request.session.logged_in %}
+                                <li><a class="waves-effect waves-dark" href="{% url 'dashboard' %}">
+                                  {% if request.session.is_seller %}
+                                    {{request.session.user_first_name}}|Seller
+                                {% else %}
+                                    {{request.session.user_first_name}}|Buyer
+                                {% endif %}
+                            </a></li>
+                                {% if request.session.is_seller %}
+                            <li><a class="waves-effect waves-dark" href="{% url 'property_featured' %}">Post Property</a></li>
+                        {% endif %}
+                            <li><a class="waves-effect waves-dark" href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a class="waves-effect waves-dark" href="{% url 'register' %}">Register</a></li>
+                            <li><a class="waves-effect waves-dark" href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
                                 <li><a href="contact.html">Contact</a></li>
                             </ul>
-
-                            <!-- Search Form -->
-                            <div class="south-search-form">
-                                <form action="#" method="post">
-                                    <input type="search" name="search" id="search" placeholder="Search Anything ...">
-                                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                </form>
-                            </div>
-
-                            <!-- Search Button -->
-                            <a href="#" class="searchbtn"><i class="fa" aria-hidden="true"></i></a>
-                        </div>
                         <!-- Nav End -->
                     </div>
                 </nav>
@@ -209,12 +156,12 @@
                             <p>Search for your home</p>
                         </div>
                         <!-- Search Form -->
-                        <form action="#" method="post" id="advanceSearch">
+                        <form action="{% url 'search' %}" method="get" id="advanceSearch">
                             <div class="row">
 
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
-                                        <input type="input" class="form-control" name="input" placeholder="Keyword">
+                                        <input type="input" class="form-control" name="input" placeholder="Property name">
                                     </div>
                                 </div>
 
@@ -222,16 +169,14 @@
                                     <div class="form-group">
                                         <select class="form-control" id="cities">
                                             <option>All Cities</option>
-                                            <option>Riga</option>
-                                            <option>Melbourne</option>
-                                            <option>Vienna</option>
-                                            <option>Vancouver</option>
-                                            <option>Toronto</option>
-                                            <option>Calgary</option>
-                                            <option>Adelaide</option>
-                                            <option>Perth</option>
-                                            <option>Auckland</option>
-                                            <option>Helsinki</option>
+                                            <option>New Delhi</option>
+                                            <option>Noida</option>
+                                            <option>Gurugram</option>
+                                            <option>Chandigarh</option>
+                                            <option>Bangalore</option>
+                                            <option>Pune</option>
+                                            <option>Mumbai</option>
+                                            <option>Chennai</option>
                                         </select>
                                     </div>
                                 </div>
