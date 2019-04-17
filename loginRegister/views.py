@@ -19,9 +19,27 @@ from properties.models import Property, PropertyImages, Enquiry
 def index(request):
     user = UserForm()
 
-    context = {'form': user}
-
-    return render(request, 'homepage.html')
+    prop = []
+    prop_images = []
+    count = len(Property.objects.filter())
+    indexes = [i for i in range(count, count - 3, -1)]
+    current_user = request.session.get('current_user', None)
+    user_name = ''
+    if current_user is not None:
+        user_name = User.objects.get(username=current_user).first_name
+    for i in indexes:
+        prop.append(Property.objects.get(pk=i))
+        image = PropertyImages.objects.filter(property_name_id=prop[len(prop) - 1].id)[0]
+        prop_images.append(image)
+    final_prop = zip(prop, prop_images)
+    return render(request, 'homepage.html', {'property': prop,
+                                             'property_images': prop_images,
+                                             'range': range(1, 4),
+                                             'final_property': final_prop,
+                                             'logged_in': request.session.get('logged_in', None),
+                                             'user_first_name': user_name,
+                                             'is_seller': request.session.get('is_seller', False)
+                                             })
 
 
 class NewUser(FormView):

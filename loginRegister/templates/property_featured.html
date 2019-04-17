@@ -11,82 +11,16 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="{% static 'homepage/style.css' %}">
     <title>Featured Properties</title>
+
 </head>
 <body>
 
 
-    <!-- ##### Header Area Start ##### -->
-    <header class="header-area">
 
-        <!-- Top Header Area -->
-        <div class="top-header-area">
-            <div class="h-100 d-md-flex justify-content-between align-items-center">
-                <div class="email-address">
-                    <a href="mailto:contact@southtemplate.com">contact@tothenew.com</a>
-                </div>
-                <div class="phone-number d-flex">
-                    <div class="icon">
-                        <img src="{% static 'img/icons/phone-call.png' %}" alt="">
-                    </div>
-                    <div class="number">
-                        <a href="tel:+91 954 099 3336">+91 954 099 3336</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Header Area -->
-        <div class="main-header-area" id="stickyHeader">
-            <div class="classy-nav-container breakpoint-off">
-                <!-- Classy Menu -->
-                <nav class="classy-navbar justify-content-between" id="southNav">
-
-                    <!-- Logo -->
-                    <a class="nav-brand" href="index.html"><img src="{% static 'homepage/img/core-img/logo.png' %}" alt=""></a>
-
-                    <!-- Navbar Toggler -->
-                    <div class="classy-navbar-toggler">
-                        <span class="navbarToggler"><span></span><span></span><span></span></span>
-                    </div>
-
-                    <!-- Menu -->
-                    <div class="classy-menu">
-
-                        <!-- close btn -->
-                        <div class="classycloseIcon">
-                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                        </div>
-
-                        <!-- Nav Start -->
-                        <div class="classynav">
-                            <ul>
-
-                                {% if request.session.logged_in %}
-                                <li><a class="waves-effect waves-dark" href="{% url 'dashboard' %}">
-                                  {% if request.session.is_seller %}
-                                    {{request.user.first_name}}|Seller
-                                {% else %}
-                                    {{request.user.first_name}}|Buyer
-                                {% endif %}
-                            </a></li>
-                                {% if request.session.is_seller %}
-                            <li><a class="waves-effect waves-dark" href="{% url 'property_add' %}">Post Property</a></li>
-                        {% endif %}
-                            <li><a class="waves-effect waves-dark" href="{% url 'logout' %}">Logout</a></li>
-                        {% else %}
-                            <li><a class="waves-effect waves-dark" href="{% url 'register' %}">Register</a></li>
-                            <li><a class="waves-effect waves-dark" href="{% url 'login' %}">Login</a></li>
-                        {% endif %}
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        <!-- Nav End -->
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </header>
-    <!-- ##### Header Area End ##### -->
     <br><br><br><br><br><br>
+
+
+
 
  <section class="featured-properties-area section-padding-100-50">
         <div class="container">
@@ -99,9 +33,6 @@
             </div>
 
             <div class="row">
-
-
-
 
 
 
@@ -146,11 +77,17 @@
                                     <span>{{prop.0.property_bedrooms}}</span>
                                 </div>
                             </div>
+                            <div class="list-price">
+                                <form method="get" action="{% url 'existing_property' id=prop.0.id %}">
+                                <button type="submit">BUY</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 {% endfor %}
+
 
 
 

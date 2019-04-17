@@ -217,11 +217,16 @@ class DeleteProperty(DeleteView):
 def search(request):
     property_list = Property.objects.all()
     property_filter = PropertyFilter(request.GET, queryset=property_list)
-
+    prop_images = []
     prop = property_filter.queryset
-    prop_images = [PropertyImages.objects.filter(property_name=props) for props in prop]
-
-    return render(request, 'property_search.html', {'filter': property_filter, 'prop_images': prop_images})
+    # prop_images = [PropertyImages.objects.filter(property_name=props) for props in prop]
+    for props in prop:
+        image = PropertyImages.objects.filter(property_name=props)[0]
+        prop_images.append(image)
+    final_result = zip(property_filter.qs, prop_images)
+    print(property_filter)
+    # import pdb; pdb.set_trace()
+    return render(request, 'property_search.html', {'filter': property_filter, 'final': final_result})
 
 
 def handle_query(request, current_property, current_user, id):
@@ -251,10 +256,6 @@ def featured_page(request):
         user_name = User.objects.get(username=current_user).first_name
     for i in indexes:
         prop.append(Property.objects.get(pk=i))
-        # print(len(prop))
-        # print(len(prop)-1)
-        # print(prop[len(prop)-1])
-        # PropertyImages.objects.get(property_name=prop[len(prop)-1])
         image = PropertyImages.objects.filter(property_name_id=prop[len(prop)-1].id)[0]
         prop_images.append(image)
     final_prop = zip(prop, prop_images)

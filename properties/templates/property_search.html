@@ -4,64 +4,99 @@
 <head>
     <meta charset="UTF-8">
     <title>Search</title>
+      {% include 'header.html' %}
 </head>
 <body>
 
-  <form method="get" action="{% url 'search' %}">
-    {{ filter.form.as_p }}
-    <input type="submit">Search</input>
-  </form>
+<br><br><br><br><br><br><br><br>
+
+<!-- ##### Advance Search Area Start ##### -->
+    <div class="south-search-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="advanced-search-form">
+                        <!-- Search Title -->
+                        <div class="search-title">
+                            <p>Search for your home</p>
+                        </div>
+                        <!-- Search Form -->
+                        <form method="get" action="{% url 'search' %}" id="advanceSearch">
+                            <div class="row">
+
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        Property name (contains): {{filter.form.property_title__icontains}}
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        City: {{filter.form.property_city}}
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        Pin Code: {{filter.form.property_pin}}
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        No. of Bedrooms: {{filter.form.property_bedrooms}}
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-xl-3">
+                                    <div class="form-group">
+                                        No. of Bathrooms: {{filter.form.property_bathrooms}}
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-xl-2">
+                                    <div class="form-group">
+                                        No. of Garages: {{filter.form.property_garage}} <br><br><br>
+                                    </div>
+                                </div>
+
+                                    <!-- Submit -->
+                                    <div class="form-group mb-0" style="margin-left:400px">
+                                        <br><button type="submit" class="btn south-btn"><a href="{% url 'search' %}"></a>Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Advance Search Area End ##### -->
 
 
 
 
-<!--<div style="top:100px left:100px">-->
-
-<!--    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="border:1px solid black; width:500px;height:200px;margin:0 auto; ">-->
-<!-- Indicators -->
-
-<!--      <div class="carousel-inner" role="listbox">-->
-<!--    {% for img in prop_images %}-->
-<!--          {% for im in img %}-->
-<!--  <div class="item{% if forloop.first %} active{% endif %}">-->
-<!--  <img style="height:100%;max-height:500px;" src="{{im.property_image.url}}" alt="Image">-->
-<!--  </div>-->
-<!--          {% endfor %}-->
-<!--  {%endfor%}-->
-<!--    </div>-->
-
-    <!-- Left and right controls -->
-<!--    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">-->
-<!--        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>-->
-<!--        <span class="sr-only">Previous</span>-->
-<!--    </a>-->
-<!--    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">-->
-<!--        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>-->
-<!--        <span class="sr-only">Next</span>-->
-<!--    </a>-->
-<!--</div>-->
-<!--</div>-->
-           {% for property in filter.qs %}
-
-  <ul>
-
-
-    <li>Title: {{ property.property_title }}</li>
-    <li>Address: {{ property.property_address }}</li>
-    <li>City: {{property.property_city}}</li>
-    <li>State: {{property.property_state}}</li>
-    <li>Pin Code: {{ property.property_pin }}</li>
-    <li>Price: {{ property.property_price }}</li>
-    <li>No. of bedrooms: {{ property.property_bedrooms }}</li>
-    <li>No. of bathrooms: {{ property.property_bathrooms }}</li>
-    <li>Area: {{ property.property_sqFeet }}sqft</li>
-    <li>Lot Size: {{ property.property_lotSize }}</li>
-    <li>No. of Garages: {{ property.property_garage }}</li>
-    <li>Description: {{ property.property_description }}</li>
-    <br><br>
-
+  {% for property in final %}
+    <ul>
+      <img style="height:100%;max-height:500px;" src="{{property.1.property_image.url}}" alt="Image">
+      <li>Image title: {{property.1.property_image}}</li>
+      <li>Title: {{ property.0.property_title }}</li>
+      <li>Address: {{ property.0.property_address }}</li>
+      <li>City: {{property.0.property_city}}</li>
+      <li>State: {{property.0.property_state}}</li>
+      <li>Pin Code: {{ property.0.property_pin }}</li>
+      <li>Price: {{ property.0.property_price }}</li>
+      <li>No. of bedrooms: {{ property.0.property_bedrooms }}</li>
+      <li>No. of bathrooms: {{ property.0.property_bathrooms }}</li>
+      <li>Area: {{ property.0.property_sqFeet }}sqft</li>
+      <li>Lot Size: {{ property.0.property_lotSize }}</li>
+      <li>No. of Garages: {{ property.0.property_garage }}</li>
+      <li>Description: {{ property.0.property_description }}</li>
+      <br><br>
+    </ul>
   {% endfor %}
-  </ul>
+
 
 </body>
 </html>

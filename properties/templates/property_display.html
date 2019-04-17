@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,85 +9,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <style type="text/css">
+
 </style>
+    {% include 'header.html' %}
 </head>
 <body>
 
 
-    <!-- ##### Header Area Start ##### -->
-    <header class="header-area">
-
-        <!-- Top Header Area -->
-        <div class="top-header-area">
-            <div class="h-100 d-md-flex justify-content-between align-items-center">
-                <div class="email-address">
-                    <a href="mailto:contact@southtemplate.com">contact@tothenew.com</a>
-                </div>
-                <div class="phone-number d-flex">
-                    <div class="icon">
-                        <img src="{% static 'img/icons/phone-call.png' %}" alt="">
-                    </div>
-                    <div class="number">
-                        <a href="tel:+91 954 099 3336">+91 954 099 3336</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Header Area -->
-        <div class="main-header-area" id="stickyHeader">
-            <div class="classy-nav-container breakpoint-off">
-                <!-- Classy Menu -->
-                <nav class="classy-navbar justify-content-between" id="southNav">
-
-                    <!-- Logo -->
-                    <a class="nav-brand" href="index.html"><img src="{% static 'homepage/img/core-img/logo.png' %}" alt=""></a>
-
-                    <!-- Navbar Toggler -->
-                    <div class="classy-navbar-toggler">
-                        <span class="navbarToggler"><span></span><span></span><span></span></span>
-                    </div>
-
-                    <!-- Menu -->
-                    <div class="classy-menu">
-
-                        <!-- close btn -->
-                        <div class="classycloseIcon">
-                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                        </div>
-
-                        <!-- Nav Start -->
-                        <div class="classynav">
-                            <ul>
-
-
-                                <li><a href="{% url 'featured_properties' %}">Featured Properties</a></li>
-                                {% if request.session.logged_in %}
-                                <li><a class="waves-effect waves-dark" href="{% url 'dashboard' %}">
-                                  {% if request.session.is_seller %}
-                                    {{request.user.first_name}}|Seller
-                                {% else %}
-                                    {{request.user.first_name}}|Buyer
-                                {% endif %}
-                            </a></li>
-                                {% if request.session.is_seller %}
-                            <li><a class="waves-effect waves-dark" href="{% url 'property_add' %}">Post Property</a></li>
-                        {% endif %}
-                            <li><a class="waves-effect waves-dark" href="{% url 'logout' %}">Logout</a></li>
-                        {% else %}
-                            <li><a class="waves-effect waves-dark" href="{% url 'register' %}">Register</a></li>
-                            <li><a class="waves-effect waves-dark" href="{% url 'login' %}">Login</a></li>
-                        {% endif %}
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        <!-- Nav End -->
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </header>
-    <!-- ##### Header Area End ##### -->
-
+<br><br><br><br><br><br><br><br><br><br><br><br>
 
 <div style="top:100px left:100px">
 
@@ -120,17 +50,18 @@
 
 
 </div>
-Title:{{property.property_title}}<br>
-    Address:{{property.property_address}}<br>
-    PIN:{{property.property_pin}}<br>
-    Price:{{property.property_price}}<br>
-    No. of bedrooms:{{property.property_bedrooms}}<br>
-    No. of bathrooms:{{property.property_bathrooms}}<br>
-    Area:{{property.property_sqFeet}}sq feet<br>
-    Lot Size:{{property.property_lotSize}}<br>
-    Garages:{{property.property_garage}}<br>
-    Description:{{property.property_description}}<br>
-
+    <ul>
+    <h4><li>Title: {{property.property_title}}<br></li></h4>
+    <h4><li>Address: {{property.property_address}}<br></li></h4>
+    <h4><li>PIN: {{property.property_pin}}<br></li></h4>
+    <h4><li>Price: {{property.property_price}}<br></li></h4>
+    <h4><li>No. of bedrooms: {{property.property_bedrooms}}<br></li></h4>
+    <h4><li>No. of bathrooms: {{property.property_bathrooms}}<br></li></h4>
+    <h4><li>Area: {{property.property_sqFeet}}sq feet<br></li></h4>
+    <h4><li>Lot Size: {{property.property_lotSize}}<br></li></h4>
+    <h4><li>Garages: {{property.property_garage}}<br></li></h4>
+    <h4><li>Description: {{property.property_description}}<br></li></h4>
+    </ul>
 {% if logged_in %}
     {% if is_buyer %}
         {% if no_query_made %}
@@ -141,7 +72,7 @@ Title:{{property.property_title}}<br>
     {% endif %}
 {% else %}
     Login To Post A Query
-    <a href="{% url 'login' %}"><input type="submit" value="Login" style="decoration:none"></a>
+    <h3><a href="{% url 'login' %}"><input type="submit" value="Login" style="decoration:none"></a></h3><br><br>
 {% endif %}
 
 </body>

@@ -55,7 +55,7 @@
                 <nav class="classy-navbar justify-content-between" id="southNav">
 
                     <!-- Logo -->
-                    <a class="nav-brand" href="index.html"><img src="{% static 'homepage/img/core-img/logo.png' %}" alt=""></a>
+                    <a class="nav-brand" href="#"><img src="{% static 'homepage/img/core-img/logo.png' %}" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -75,7 +75,7 @@
                             <ul>
 
 
-                                <li><a href="{% url 'featured_properties' %}">Featured Properties</a></li>
+                                <li><a href="#">Listed Properties</a></li>
                                 {% if request.session.logged_in %}
                                 <li><a class="waves-effect waves-dark" href="{% url 'dashboard' %}">
                                   {% if request.session.is_seller %}
@@ -94,6 +94,10 @@
                         {% endif %}
                                 <li><a href="#">Contact</a></li>
                             </ul>
+
+                            <!-- Search Button -->
+                            <a href="{% url 'search' %}" class="searchbtn"><i class="fa" aria-hidden="true"></i></a>
+
                         <!-- Nav End -->
                     </div>
                 </nav>
@@ -145,229 +149,6 @@
     </section>
     <!-- ##### Hero Area End ##### -->
 
-    <!-- ##### Advance Search Area Start ##### -->
-    <div class="south-search-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="advanced-search-form">
-                        <!-- Search Title -->
-                        <div class="search-title">
-                            <p>Search for your home</p>
-                        </div>
-                        <!-- Search Form -->
-                        <form action="{% url 'search' %}" method="get" id="advanceSearch">
-                            <div class="row">
-
-                                <div class="col-12 col-md-4 col-lg-3">
-                                    <div class="form-group">
-                                        <input type="input" class="form-control" name="input" placeholder="Property name">
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-4 col-lg-3">
-                                    <div class="form-group">
-                                        <select class="form-control" id="cities">
-                                            <option>All Cities</option>
-                                            <option>New Delhi</option>
-                                            <option>Noida</option>
-                                            <option>Gurugram</option>
-                                            <option>Chandigarh</option>
-                                            <option>Bangalore</option>
-                                            <option>Pune</option>
-                                            <option>Mumbai</option>
-                                            <option>Chennai</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-4 col-lg-3">
-                                    <div class="form-group">
-                                        <select class="form-control" id="catagories">
-                                            <option>All Catagories</option>
-                                            <option>Apartment</option>
-                                            <option>Bar</option>
-                                            <option>Farm</option>
-                                            <option>House</option>
-                                            <option>Store</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-4 col-lg-3">
-                                    <div class="form-group">
-                                        <select class="form-control" id="offers">
-                                            <option>All Offers</option>
-                                            <option>100% OFF</option>
-                                            <option>75% OFF</option>
-                                            <option>50% OFF</option>
-                                            <option>25% OFF</option>
-                                            <option>10% OFF</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-4 col-xl-3">
-                                    <div class="form-group">
-                                        <select class="form-control" id="listings">
-                                            <option>All Listings</option>
-                                            <option>Listings 1</option>
-                                            <option>Listings 2</option>
-                                            <option>Listings 3</option>
-                                            <option>Listings 4</option>
-                                            <option>Listings 5</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-4 col-xl-2">
-                                    <div class="form-group">
-                                        <select class="form-control" id="bedrooms">
-                                            <option>Bedrooms</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5+</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-4 col-xl-2">
-                                    <div class="form-group">
-                                        <select class="form-control" id="bathrooms">
-                                            <option>Bathrooms</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5+</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-8 col-lg-12 col-xl-5 d-flex">
-                                    <!-- Space Range -->
-                                    <div class="slider-range">
-                                        <div data-min="120" data-max="820" data-unit=" sq. ft" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="120" data-value-max="820">
-                                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                        </div>
-                                        <div class="range">120 sq. ft - 820 sq. ft</div>
-                                    </div>
-
-                                    <!-- Distance Range -->
-                                    <div class="slider-range">
-                                        <div data-min="10" data-max="1300" data-unit=" mil" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="10" data-value-max="1300">
-                                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                        </div>
-                                        <div class="range">10 mil - 1300 mil</div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 search-form-second-steps">
-                                    <div class="row">
-
-                                        <div class="col-12 col-md-4 col-lg-3">
-                                            <div class="form-group">
-                                                <select class="form-control" id="types">
-                                                    <option>All Types</option>
-                                                    <option>Apartment <span>(30)</span></option>
-                                                    <option>Land <span>(69)</span></option>
-                                                    <option>Villas <span>(103)</span></option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-4 col-lg-3">
-                                            <div class="form-group">
-                                                <select class="form-control" id="catagories2">
-                                                    <option>All Catagories</option>
-                                                    <option>Apartment</option>
-                                                    <option>Bar</option>
-                                                    <option>Farm</option>
-                                                    <option>House</option>
-                                                    <option>Store</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-4 col-lg-3">
-                                            <div class="form-group">
-                                                <select class="form-control" id="Actions">
-                                                    <option>All Actions</option>
-                                                    <option>Sales</option>
-                                                    <option>Booking</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-4 col-lg-3">
-                                            <div class="form-group">
-                                                <select class="form-control" id="city2">
-                                                    <option>All City</option>
-                                                    <option>City 1</option>
-                                                    <option>City 2</option>
-                                                    <option>City 3</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <select class="form-control" id="Actions3">
-                                                    <option>All Actions</option>
-                                                    <option>Sales</option>
-                                                    <option>Booking</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <select class="form-control" id="city3">
-                                                    <option>All City</option>
-                                                    <option>City 1</option>
-                                                    <option>City 2</option>
-                                                    <option>City 3</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <select class="form-control" id="city5">
-                                                    <option>All City</option>
-                                                    <option>City 1</option>
-                                                    <option>City 2</option>
-                                                    <option>City 3</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 d-flex justify-content-between align-items-end">
-                                    <!-- More Filter -->
-                                    <div class="more-filter">
-                                        <a href="#" id="moreFilter">+ More filters</a>
-                                    </div>
-                                    <!-- Submit -->
-                                    <div class="form-group mb-0">
-                                        <button type="submit" class="btn south-btn"><a href="{% url 'search' %}"></a>Search</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ##### Advance Search Area End ##### -->
 
     <!-- ##### Featured Properties Area Start ##### -->
     <section class="featured-properties-area section-padding-100-50">
@@ -378,253 +159,63 @@
                         <h2>Featured Properties</h2>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
+
+
+                {% for prop in final_property %}
 
                 <!-- Single Featured Property -->
                 <div class="col-12 col-md-6 col-xl-4">
                     <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
                         <!-- Property Thumbnail -->
                         <div class="property-thumb">
-                            <img src="{% static 'homepage/img/bg-img/feature1.jpg' %}" alt="">
+                            <img src="{{prop.1.property_image.url}}" alt="">
 
                             <div class="tag">
                                 <span>For Sale</span>
                             </div>
+
                             <div class="list-price">
-                                <p>$945 679</p>
+                                <p>Rs. {{prop.0.property_price}}</p>
                             </div>
                         </div>
                         <!-- Property Content -->
                         <div class="property-content">
-                            <h5>Villa in Los Angeles</h5>
-                            <p class="location"><img src="{% static 'homepage/img/icons/location.png' %}" alt="">Upper Road 3411, no.34 CA</p>
-                            <p>Integer nec bibendum lacus. Suspendisse dictum enim sit amet libero malesuada.</p>
+                            <h5>{{prop.0.property_title}}</h5>
+                            <p class="location"><img src="{% static 'homepage/img/icons/location.png' %}" alt="">{{prop.0.property_address}},</p>
+                            <h6> {{prop.0.property_city}}, {{prop.0.property_state}} </h6>
+                            <h6> {{prop.0.property_pin}} </h6>
+                            <p>{{prop.0.property_description}}</p>
                             <div class="property-meta-data d-flex align-items-end justify-content-between">
                                 <div class="new-tag">
                                     <img src="{% static 'homepage/img/icons/new.png' %}" alt="">
                                 </div>
                                 <div class="bathroom">
                                     <img src="{% static 'homepage/img/icons/bathtub.png' %}" alt="">
-                                    <span>2</span>
+                                    <span>{{prop.0.property_bathrooms}}</span>
                                 </div>
                                 <div class="garage">
                                     <img src="{% static 'homepage/img/icons/garage.png' %}" alt="">
-                                    <span>2</span>
+                                    <span>{{prop.0.property_garage}}</span>
                                 </div>
                                 <div class="space">
                                     <img src="{% static 'homepage/img/icons/space.png' %}" alt="">
-                                    <span>120 sq ft</span>
+                                    <span>{{prop.0.property_bedrooms}}</span>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Featured Property -->
-                <div class="col-12 col-md-6 col-xl-4">
-                    <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="200ms">
-                        <!-- Property Thumbnail -->
-                        <div class="property-thumb">
-                            <img src="{% static 'homepage/img/bg-img/feature2.jpg' %}" alt="">
-
-                            <div class="tag">
-                                <span>For Sale</span>
                             </div>
                             <div class="list-price">
-                                <p>$945 679</p>
-                            </div>
-                        </div>
-                        <!-- Property Content -->
-                        <div class="property-content">
-                            <h5>Town House in Los Angeles</h5>
-                            <p class="location"><img src="{% static 'homepage/img/icons/location.png' %}" alt="">Upper Road 3411, no.34 CA</p>
-                            <p>Integer nec bibendum lacus. Suspendisse dictum enim sit amet libero malesuada.</p>
-                            <div class="property-meta-data d-flex align-items-end justify-content-between">
-                                <div class="new-tag">
-                                    <img src="{% static 'homepage/img/icons/new.png' %}" alt="">
-                                </div>
-                                <div class="bathroom">
-                                    <img src="{% static 'homepage/img/icons/bathtub.png' %}" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="garage">
-                                    <img src="{% static 'homepage/img/icons/garage.png' %}" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="space">
-                                    <img src="{% static 'homepage/img/icons/space.png' %}" alt="">
-                                    <span>120 sq ft</span>
-                                </div>
+                                <form method="get" action="{% url 'existing_property' id=prop.0.id %}">
+                                <button type="submit">BUY</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Single Featured Property -->
-                <div class="col-12 col-md-6 col-xl-4">
-                    <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="300ms">
-                        <!-- Property Thumbnail -->
-                        <div class="property-thumb">
-                            <img src="{% static 'homepage/img/bg-img/feature3.jpg' %}" alt="">
+                {% endfor %}
 
-                            <div class="tag">
-                                <span>For Sale</span>
-                            </div>
-                            <div class="list-price">
-                                <p>$945 679</p>
-                            </div>
-                        </div>
-                        <!-- Property Content -->
-                        <div class="property-content">
-                            <h5>Town House in Los Angeles</h5>
-                            <p class="location"><img src="{% static 'homepage/img/icons/location.png' %}" alt="">Upper Road 3411, no.34 CA</p>
-                            <p>Integer nec bibendum lacus. Suspendisse dictum enim sit amet libero malesuada.</p>
-                            <div class="property-meta-data d-flex align-items-end justify-content-between">
-                                <div class="new-tag">
-                                    <img src="{% static 'homepage/img/icons/new.png' %}" alt="">
-                                </div>
-                                <div class="bathroom">
-                                    <img src="{% static 'homepage/img/icons/bathtub.png' %}" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="garage">
-                                    <img src="{% static 'homepage/img/icons/garage.png' %}" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="space">
-                                    <img src="{% static 'homepage/img/icons/space.png' %}" alt="">
-                                    <span>120 sq ft</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Single Featured Property -->
-                <div class="col-12 col-md-6 col-xl-4">
-                    <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="400ms">
-                        <!-- Property Thumbnail -->
-                        <div class="property-thumb">
-                            <img src="{% static 'homepage/img/bg-img/feature4.jpg' %}" alt="">
 
-                            <div class="tag">
-                                <span>For Sale</span>
-                            </div>
-                            <div class="list-price">
-                                <p>$945 679</p>
-                            </div>
-                        </div>
-                        <!-- Property Content -->
-                        <div class="property-content">
-                            <h5>Villa in Los Angeles</h5>
-                            <p class="location"><img src="{% static 'homepage/img/icons/location.png' %}" alt="">Upper Road 3411, no.34 CA</p>
-                            <p>Integer nec bibendum lacus. Suspendisse dictum enim sit amet libero malesuada.</p>
-                            <div class="property-meta-data d-flex align-items-end justify-content-between">
-                                <div class="new-tag">
-                                    <img src="{% static 'homepage/img/icons/new.png' %}" alt="">
-                                </div>
-                                <div class="bathroom">
-                                    <img src="{% static 'homepage/img/icons/bathtub.png' %}" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="garage">
-                                    <img src="{% static 'homepage/img/icons/garage.png' %}" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="space">
-                                    <img src="{% static 'homepage/img/icons/space.png' %}" alt="">
-                                    <span>120 sq ft</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Featured Property -->
-                <div class="col-12 col-md-6 col-xl-4">
-                    <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="500ms">
-                        <!-- Property Thumbnail -->
-                        <div class="property-thumb">
-                            <img src="{% static 'homepage/img/bg-img/feature5.jpg' %}" alt="">
-
-                            <div class="tag">
-                                <span>For Sale</span>
-                            </div>
-                            <div class="list-price">
-                                <p>$945 679</p>
-                            </div>
-                        </div>
-                        <!-- Property Content -->
-                        <div class="property-content">
-                            <h5>Town House in Los Angeles</h5>
-                            <p class="location"><img src="{% static 'homepage/img/icons/location.png' %}" alt="">Upper Road 3411, no.34 CA</p>
-                            <p>Integer nec bibendum lacus. Suspendisse dictum enim sit amet libero malesuada.</p>
-                            <div class="property-meta-data d-flex align-items-end justify-content-between">
-                                <div class="new-tag">
-                                    <img src="{% static 'homepage/img/icons/new.png' %}" alt="">
-                                </div>
-                                <div class="bathroom">
-                                    <img src="{% static 'homepage/img/icons/bathtub.png' %}" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="garage">
-                                    <img src="{% static 'homepage/img/icons/garage.png' %}" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="space">
-                                    <img src="{% static 'homepage/img/icons/space.png' %}" alt="">
-                                    <span>120 sq ft</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Featured Property -->
-                <div class="col-12 col-md-6 col-xl-4">
-                    <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="600ms">
-                        <!-- Property Thumbnail -->
-                        <div class="property-thumb">
-                            <img src="{% static 'homepage/img/bg-img/feature6.jpg' %}" alt="">
-
-                            <div class="tag">
-                                <span>For Sale</span>
-                            </div>
-                            <div class="list-price">
-                                <p>$945 679</p>
-                            </div>
-                        </div>
-                        <!-- Property Content -->
-                        <div class="property-content">
-                            <h5>Town House in Los Angeles</h5>
-                            <p class="location"><img src="{% static 'homepage/img/icons/location.png' %}" alt="">Upper Road 3411, no.34 CA</p>
-                            <p>Integer nec bibendum lacus. Suspendisse dictum enim sit amet libero malesuada.</p>
-                            <div class="property-meta-data d-flex align-items-end justify-content-between">
-                                <div class="new-tag">
-                                    <img src="{% static 'homepage/img/icons/new.png' %}" alt="">
-                                </div>
-                                <div class="bathroom">
-                                    <img src="{% static 'homepage/img/icons/bathtub.png' %}" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="garage">
-                                    <img src="{% static 'homepage/img/icons/garage.png' %}" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="space">
-                                    <img src="{% static 'homepage/img/icons/space.png' %}" alt="">
-                                    <span>120 sq ft</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ##### Featured Properties Area End ##### -->
 
     <!-- ##### Call To Action Area Start ##### -->
     <section class="call-to-action-area bg-fixed bg-overlay-black" style="background-image: url({% static 'homepage/img/bg-img/cta.jpg' %})">
@@ -632,9 +223,9 @@
             <div class="row align-items-center h-100">
                 <div class="col-12">
                     <div class="cta-content text-center">
-                        <h2 class="wow fadeInUp" data-wow-delay="300ms">Are you looking for a place to rent?</h2>
-                        <h6 class="wow fadeInUp" data-wow-delay="400ms">Suspendisse dictum enim sit amet libero malesuada feugiat.</h6>
-                        <a href="#" class="btn south-btn mt-50 wow fadeInUp" data-wow-delay="500ms">Search</a>
+                        <h2 class="wow fadeInUp" data-wow-delay="300ms">Are you looking for a place to buy?</h2>
+                        <h6 class="wow fadeInUp" data-wow-delay="400ms">You found just the right place for it.</h6>
+                        <a href="{% url 'search' %}" class="btn south-btn mt-50 wow fadeInUp" data-wow-delay="500ms">Search</a>
                     </div>
                 </div>
             </div>
