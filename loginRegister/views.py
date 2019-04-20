@@ -19,7 +19,7 @@ from properties.models import Property, PropertyImages, Enquiry
 def index(request):
     user = UserForm()
 
-    prop = []
+    #prop = []
     prop_images = []
     count = len(Property.objects.filter())
     indexes = [i for i in range(count, count - 3, -1)]
@@ -27,10 +27,11 @@ def index(request):
     user_name = ''
     if current_user is not None:
         user_name = User.objects.get(username=current_user).first_name
-    for i in indexes:
-        prop.append(Property.objects.get(pk=i))
-        image = PropertyImages.objects.filter(property_name_id=prop[len(prop) - 1].id)[0]
-        prop_images.append(image)
+    prop = list(Property.objects.all().order_by('-id')[:3])
+    for property in prop:
+        #prop.append(Property.objects.get(pk=i))
+        #image = PropertyImages.objects.filter(property_name_id=prop[len(prop) - 1].id)[0]
+        prop_images.append(PropertyImages.objects.filter(property_name_id=property.id)[0])
     final_prop = zip(prop, prop_images)
     return render(request, 'homepage.html', {'property': prop,
                                              'property_images': prop_images,
@@ -50,10 +51,9 @@ class NewUser(FormView):
 
     def form_valid(self, form):
         form.save()
-        return HttpResponse('all set')
+        return redirect('login')
 
     def form_invalid(self, form):
-        """if invalid return error and back to it"""
         return render(self.request, self.template_name, {'form': form, 'error': form.errors})
 
 
@@ -162,7 +162,7 @@ class Dashboard(View):
             if request.FILES.get('profile_pic'):
                 current_user.profile_pic = request.FILES.get('profile_pic')
             current_user.save()
-            return HttpResponse("Details updated!")
+            return redirect('login')
 
 
 def queries(request,):
@@ -187,3 +187,18 @@ def search(request):
 
     # import pdb; pdb.set_trace()
     return render(request, 'property_search.html', {'filter': property_filter, 'prop_images': prop_images})
+
+
+# def show_user(request):
+#     username = request.session.get('current_user')
+#     is_seller = request.session.get('is_seller', False)
+#     try:
+#         current_user = Profile.objects.get(username=username)
+#         user = {'user': current_user}
+#         if is_seller:
+#             return render('dashboard_sellers.html', user)
+#         else:
+#             return render('dashboard_buyer.html', user)
+#     except Profile.DoesNotExist:
+#         messages.add_message(request, messages.INFO, "Please Login first to view dashboard!")
+#         return redirect('login')

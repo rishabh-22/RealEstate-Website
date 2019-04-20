@@ -20,6 +20,7 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="{% static 'homepage/style.css' %}">
 
+
 </head>
 
 <body>
@@ -75,7 +76,7 @@
                             <ul>
 
 
-                                <li><a href="#">Listed Properties</a></li>
+                                <li><a href="{% url 'listed_properties' %}">Listed Properties</a></li>
                                 {% if request.session.logged_in %}
                                 <li><a class="waves-effect waves-dark" href="{% url 'dashboard' %}">
                                   {% if request.session.is_seller %}
@@ -92,7 +93,7 @@
                             <li><a class="waves-effect waves-dark" href="{% url 'register' %}">Register</a></li>
                             <li><a class="waves-effect waves-dark" href="{% url 'login' %}">Login</a></li>
                         {% endif %}
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">About us</a></li>
                             </ul>
 
                             <!-- Search Button -->
@@ -205,7 +206,7 @@
                             </div>
                             <div class="list-price">
                                 <form method="get" action="{% url 'existing_property' id=prop.0.id %}">
-                                <button type="submit">BUY</button>
+                                <br><center><button type="submit" class="btn btn-default" style="width:260px">BUY</button></center>
                                 </form>
                             </div>
                         </div>
@@ -233,87 +234,6 @@
     </section>
     <!-- ##### Call To Action Area End ##### -->
 
-    <!-- ##### Testimonials Area Start ##### -->
-    <section class="south-testimonials-area section-padding-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-heading wow fadeInUp" data-wow-delay="250ms">
-                        <h2>Client testimonials</h2>
-                        <p>Suspendisse dictum enim sit amet libero malesuada feugiat.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="testimonials-slides owl-carousel wow fadeInUp" data-wow-delay="500ms">
-
-                        <!-- Single Testimonial Slide -->
-                        <div class="single-testimonial-slide text-center">
-                            <h5>Perfect Home for me</h5>
-                            <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Etiam nec odio vestibulum est mat tis effic iturut magna.</p>
-
-                            <div class="testimonial-author-info">
-                                <img src="{% static 'homepage/img/bg-img/feature6.jpg' %}" alt="">
-                                <p>Daiane Smith, <span>Customer</span></p>
-                            </div>
-                        </div>
-
-                        <!-- Single Testimonial Slide -->
-                        <div class="single-testimonial-slide text-center">
-                            <h5>Perfect Home for me</h5>
-                            <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Etiam nec odio vestibulum est mat tis effic iturut magna.</p>
-
-                            <div class="testimonial-author-info">
-                                <img src="{% static 'homepage/img/bg-img/feature6.jpg' %}" alt="">
-                                <p>Daiane Smith, <span>Customer</span></p>
-                            </div>
-                        </div>
-
-                        <!-- Single Testimonial Slide -->
-                        <div class="single-testimonial-slide text-center">
-                            <h5>Perfect Home for me</h5>
-                            <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Etiam nec odio vestibulum est mat tis effic iturut magna.</p>
-
-                            <div class="testimonial-author-info">
-                                <img src="{% static 'homepage/img/bg-img/feature6.jpg' %}" alt="">
-                                <p>Daiane Smith, <span>Customer</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ##### Testimonials Area End ##### -->
-
-    <!-- ##### Editor Area Start ##### -->
-    <section class="south-editor-area d-flex align-items-center">
-        <!-- Editor Content -->
-        <div class="editor-content-area">
-            <!-- Section Heading -->
-            <div class="section-heading wow fadeInUp" data-wow-delay="250ms">
-                <img src="{% static 'homepage/img/icons/prize.png' %}" alt="">
-                <h2>jeremy Scott</h2>
-                <p>Realtor</p>
-            </div>
-            <p class="wow fadeInUp" data-wow-delay="500ms">Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odiomattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Etiam nec odio vestibulum est mat tis effic iturut magna. Curabitur rhoncus auctor eleifend. Fusce venenatis diam urna, eu pharetra arcu varius ac. Etiam cursus turpis lectus, id iaculis risus tempor id. Phasellus fringilla nisl sed sem scelerisque, eget aliquam magna vehicula.</p>
-            <div class="address wow fadeInUp" data-wow-delay="750ms">
-                <h6><img src="{% static 'homepage/img/icons/phone-call.png' %}" alt=""> +45 677 8993000 223</h6>
-                <h6><img src="{% static 'homepage/img/icons/envelope.png' %}" alt=""> office@template.com</h6>
-            </div>
-            <div class="signature mt-50 wow fadeInUp" data-wow-delay="1000ms">
-                <img src="{% static 'homepage/img/core-img/signature.png' %}" alt="">
-            </div>
-        </div>
-
-        <!-- Editor Thumbnail -->
-        <div class="editor-thumbnail">
-            <img src="{% static 'homepage/img/bg-img/editor.jpg' %}" alt="">
-        </div>
-    </section>
-    <!-- ##### Editor Area End ##### -->
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area section-padding-100-0 bg-img gradient-background-overlay" style="background-image: url(img/bg-img/cta.jpg);">
@@ -334,7 +254,7 @@
                             <div class="footer-logo my-4">
                                 <img src="{% static 'homepage/img/core-img/logo.png' %}" alt="">
                             </div>
-                            <p>Integer nec bibendum lacus. Suspen disse dictum enim sit amet libero males uada feugiat. Praesent malesuada.</p>
+                            <p>This is your one spot for finding the home of your dreams.</p>
                         </div>
                     </div>
 
@@ -355,9 +275,9 @@
                             </div>
                             <!-- Address -->
                             <div class="address">
-                                <h6><img src="{% static 'homepage/img/icons/phone-call.png' %}" alt=""> +45 677 8993000 223</h6>
-                                <h6><img src="{% static 'homepage/img/icons/envelope.png' %}" alt=""> office@template.com</h6>
-                                <h6><img src="{% static 'homepage/img/icons/location.png' %}" alt=""> Main Str. no 45-46, b3, 56832, Los Angeles, CA</h6>
+                                <h6><img src="{% static 'homepage/img/icons/phone-call.png' %}" alt=""> +91 954 099 3336</h6>
+                                <h6><img src="{% static 'homepage/img/icons/envelope.png' %}" alt=""> rishabh.bhardwaj@tothenew.com</h6>
+                                <h6><img src="{% static 'homepage/img/icons/location.png' %}" alt=""> To The New, Tower-B, Logix Technopark, Noida sec-127</h6>
                             </div>
                         </div>
                     </div>
@@ -399,15 +319,15 @@
                             <div class="featured-properties-slides owl-carousel">
                                 <!-- Single Slide -->
                                 <div class="single-featured-properties-slide">
-                                    <a href="#"><img src="{% static 'homepage/img/bg-img/fea-product.jpg' %}" alt=""></a>
+                                    <a href="#"><img src="{% static 'homepage/img/bg-img/feature1.jpg' %}" alt=""></a>
                                 </div>
                                 <!-- Single Slide -->
                                 <div class="single-featured-properties-slide">
-                                    <a href="#"><img src="{% static 'homepage/img/bg-img/fea-product.jpg' %}" alt=""></a>
+                                    <a href="#"><img src="{% static 'homepage/img/bg-img/feature8.jpg' %}" alt=""></a>
                                 </div>
                                 <!-- Single Slide -->
                                 <div class="single-featured-properties-slide">
-                                    <a href="#"><img src="{% static 'homepage/img/bg-img/fea-product.jpg' %}" alt=""></a>
+                                    <a href="#"><img src="{% static 'homepage/img/bg-img/feature3.jpg' %}" alt=""></a>
                                 </div>
                             </div>
                         </div>
@@ -420,7 +340,7 @@
         <!-- Copywrite Text -->
         <div class="copywrite-text d-flex align-items-center justify-content-center">
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> No rights reserved | This template is not made by Rishabh.
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
         </div>
     </footer>

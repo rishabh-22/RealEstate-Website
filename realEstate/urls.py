@@ -36,6 +36,8 @@ urlpatterns = [
     path('queries/', views.queries, name='queries'),
     path('search/', p_views.search, name='search'),
     path('featured/', p_views.featured_page, name='featured_properties'),
+    path('listed/', p_views.show_listed_property, name='listed_properties'),
+    # path('user/', views.show_user, name='profile')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

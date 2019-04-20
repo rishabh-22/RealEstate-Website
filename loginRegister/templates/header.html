@@ -68,7 +68,7 @@
                             <ul>
                                 <li><a href="{% url 'homepage' %}">Home</a></li>
 
-                                <li><a href="{% url 'featured_properties' %}">Featured Properties</a></li>
+                                <li><a href="#">Listed Properties</a></li>
                                 {% if request.session.logged_in %}
                                 <li><a class="waves-effect waves-dark" href="{% url 'dashboard' %}">
                                   {% if request.session.is_seller %}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from loginRegister.models import Profile
 
 
 # Create your models here.
@@ -48,7 +49,7 @@ class PropertyImages(models.Model):
 
 class Enquiry(models.Model):
     property = models.ForeignKey(Property, related_name='property', on_delete=models.CASCADE)
-    requester = models.ForeignKey(User, related_name='requester', on_delete=models.CASCADE)
+    requester = models.ForeignKey(Profile, related_name='requester', on_delete=models.CASCADE)
     enquiry_text = models.TextField(max_length=200)
     enquiry_date = models.DateField(auto_now_add=True)
 

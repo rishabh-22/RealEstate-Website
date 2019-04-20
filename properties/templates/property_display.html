@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="{% static 'homepage/style.css' %}">
 <style type="text/css">
 
 </style>
@@ -47,21 +48,50 @@
     </a>
 </div>
 </div>
-
-
 </div>
-    <ul>
-    <h4><li>Title: {{property.property_title}}<br></li></h4>
-    <h4><li>Address: {{property.property_address}}<br></li></h4>
-    <h4><li>PIN: {{property.property_pin}}<br></li></h4>
-    <h4><li>Price: {{property.property_price}}<br></li></h4>
-    <h4><li>No. of bedrooms: {{property.property_bedrooms}}<br></li></h4>
-    <h4><li>No. of bathrooms: {{property.property_bathrooms}}<br></li></h4>
-    <h4><li>Area: {{property.property_sqFeet}}sq feet<br></li></h4>
-    <h4><li>Lot Size: {{property.property_lotSize}}<br></li></h4>
-    <h4><li>Garages: {{property.property_garage}}<br></li></h4>
-    <h4><li>Description: {{property.property_description}}<br></li></h4>
-    </ul>
+<br><br><br><br><br><br><br>
+
+
+<center>
+<div class="property-content">
+								<h2>{{property.property_title}}</h2>
+								<p class="location"><img src="{% static 'homepage/img/icons/location.png' %}" alt="">{{property.property_address}},</p>
+                                <h4> {{property.property_city}}, {{property.property_state}} </h4>
+                                <h4> {{property.property_pin}} </h4>
+                                <p>Description: {{property.property_description}}</p>
+                                <div class="property-meta-data justify-content-between">
+                                <div class="new-tag">
+                                    <img src="{% static 'homepage/img/icons/new.png' %}" alt="">
+                                    <span>Price: {{property.property_price}}</span>
+                                </div>
+                                    <br>
+                                <div class="space">
+                                    <img src="{% static 'homepage/img/icons/space.png' %}" alt="">
+                                    <span>Bedrooms: {{property.property_bedrooms}}</span>
+                                </div>
+                                    <br>
+                                <div class="bathroom">
+                                    <img src="{% static 'homepage/img/icons/bathtub.png' %}" alt="">
+                                    <span>Bathrooms: {{property.property_bathrooms}}</span>
+                                </div>
+                                    <br>
+                                <div class="garage">
+                                    <img src="{% static 'homepage/img/icons/garage.png' %}" alt="">
+                                    <span>Garages: {{property.property_garage}}</span>
+                                </div>
+                                    <br>
+
+                                <div class="space">
+                                <img src="{% static 'homepage/img/icons/space.png' %}" alt="">
+                                <span>Area: {{property.property_sqFeet}}sqft</span>
+                                </div>
+                                    <br><br>
+                                </div>
+</center>
+
+
+
+<center>
 {% if logged_in %}
     {% if is_buyer %}
         {% if no_query_made %}
@@ -71,9 +101,10 @@
         {% endif %}
     {% endif %}
 {% else %}
-    Login To Post A Query
-    <h3><a href="{% url 'login' %}"><input type="submit" value="Login" style="decoration:none"></a></h3><br><br>
+    <h3>Login To Post A Query</h3>
+    <h1><button class="btn btn-default" style="width:280px"><a href="{% url 'login' %}"><input type="submit" value="Login" style="decoration:none"></a></button></h1>
 {% endif %}
-
+</center>
+<br><br>
 </body>
 </html>

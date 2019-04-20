@@ -1,7 +1,7 @@
 {% block query_form %}
 <form method="POST">
     {% csrf_token %}
-    <textarea rows="10" cols="0" style="font-size:20px" placeholder="Write Your Query Here " name="query"></textarea><br>
-    <input type="submit" value="Submit" name="submit_query">
+    <textarea rows="5" cols="0" style="font-size:20px" placeholder="Write Your Query Here " name="query"></textarea><br>
+    <button class="btn btn-default" style="width:280px"><input type="submit" value="Submit" name="submit_query"></button>
 </form>
 {% endblock query_form %}

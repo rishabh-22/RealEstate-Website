@@ -1,5 +1,6 @@
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
@@ -43,7 +44,7 @@ class CreateNewProperty(View):
             property_form.save()
             for i in range(len(images_uploaded)):
                 PropertyImages.objects.create(property_image=images_uploaded[i], property_name_id=property_form.id)
-            return HttpResponse('all set')
+            return HttpResponse('New Property Added. Please go back to home page to continue!')
         else:
             return HttpResponse(form_data.errors)
 
@@ -132,10 +133,6 @@ class UpdateProperty(UpdateView):
     template_name = 'property_form.html'
 
     def get(self, request, *args, **kwargs):
-        """
-        Method to handle and decide whether allowing the logged in user to update the property or not
-        :return: Either the form containing values to update the properties or login page to login as seller
-        """
 
         if self.request.session.get('logged_in', False):
 
@@ -153,10 +150,7 @@ class UpdateProperty(UpdateView):
             return redirect('login')
 
     def get_context_data(self,*args, **kwargs):
-        """
-        Initialize the data to be sent to the HTML page
-        :return: context to be used by the Django Template
-        """
+
         current_property = Property.objects.get(pk=self.get_object().id)
         context = super(UpdateProperty, self).get_context_data(**kwargs)
         context['cities'] = ['New Delhi', 'Noida', 'Gurugram', 'Chandigarh', 'Bangalore', 'Pune', 'Mumbai', 'Chennai']
@@ -165,11 +159,7 @@ class UpdateProperty(UpdateView):
         return context
 
     def form_valid(self, form):
-        """
-        If the form data is valid, update the property
-        :param form: from the template
-        :return: on successful updation redirects to dashboard
-        """
+
         form.instance.property_city = form.data['select_city']
         form.instance.property_state = form.data['select_state']
         form.instance.save()
@@ -183,10 +173,7 @@ class UpdateProperty(UpdateView):
         return redirect('dashboard')
 
     def form_invalid(self, form, *args, **kwargs):
-        """
-        :param form:
-        :return: an HttpResponse to a page listing the error
-        """
+
         context = self.get_context_data()
         return render(self.request, self.template_name, context=context)
 
@@ -240,11 +227,6 @@ def handle_query(request, current_property, current_user, id):
 
 
 def featured_page(request):
-    """
-    Finds the top 3 properties from Property and send them to display
-    :param request:
-    :return: top 3 properties to display on the featured page
-    """
 
     prop = []
     prop_images = []
@@ -268,3 +250,15 @@ def featured_page(request):
                                                       'is_seller': request.session.get('is_seller', False)
                                                      })
 
+
+def show_listed_property(request):
+
+    property_set = Property.objects.all().order_by('-id')
+    property_images_set = []
+    for property in property_set:
+        property_images_set.append(PropertyImages.objects.filter(property_name_id=property.id)[0])
+    display_properties = list(zip(property_set, property_images_set))
+    page = request.GET.get('page')
+    paginator = Paginator(display_properties, 6)
+    final_properties = paginator.get_page(page)
+    return render(request, 'listed_properties.html', {'properties': final_properties})

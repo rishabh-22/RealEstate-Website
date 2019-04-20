@@ -28,13 +28,85 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{% static 'login/css/util.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}">
+	   <link rel="stylesheet" href="{% static 'homepage/style.css' %}">
 <!--===============================================================================================-->
+
 </head>
 <body>
+ <header class="header-area">
 
+        <!-- Top Header Area -->
+        <div class="top-header-area">
+            <div class="h-100 d-md-flex justify-content-between align-items-center">
+                <div class="email-address">
+                    <a href="mailto:contact@southtemplate.com">contact@tothenew.com</a>
+                </div>
+                <div class="phone-number d-flex">
+                    <div class="icon">
+                        <img src="{% static 'img/icons/phone-call.png' %}" alt="">
+                    </div>
+                    <div class="number">
+                        <a href="tel:+91 954 099 3336">+91 954 099 3336</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header Area -->
+        <div class="main-header-area" id="stickyHeader">
+            <div class="classy-nav-container breakpoint-off">
+                <!-- Classy Menu -->
+                <nav class="classy-navbar justify-content-between" id="southNav">
+
+                    <!-- Logo -->
+                    <a class="nav-brand" href="#"><img src="{% static 'homepage/img/core-img/logo.png' %}" alt=""></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+
+                        <!-- close btn -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul>
+                                <li><a href="{% url 'homepage' %}">Home</a></li>
+
+                                <li><a href="{% url 'featured_properties' %}">Featured Properties</a></li>
+                                {% if request.session.logged_in %}
+                                <li><a class="waves-effect waves-dark" href="{% url 'dashboard' %}">
+                                  {% if request.session.is_seller %}
+                                    {{request.user.first_name}}|Seller
+                                {% else %}
+                                    {{request.user.first_name}}|Buyer
+                                {% endif %}
+                            </a></li>
+                                {% if request.session.is_seller %}
+                            <li><a class="waves-effect waves-dark" href="{% url 'property_add' %}">Post Property</a></li>
+                        {% endif %}
+                            <li><a class="waves-effect waves-dark" href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a class="waves-effect waves-dark" href="{% url 'register' %}">Register</a></li>
+                        {% endif %}
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+<br><br><br><br><br>
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url({% static 'login/images/bg-01.jpg' %});">
-			<div class="wrap-login100">
+		<div class="container-login1000" style="background-image: url({% static 'login/images/bg-01.jpg' %});">
+			<center><div class="wrap-login100">
 				{% for items in error.values %}
     			{{items}}
     			{% endfor %}
@@ -60,6 +132,7 @@
 
 				</form>
 			</div>
+				</center>
 		</div>
 	</div>
 

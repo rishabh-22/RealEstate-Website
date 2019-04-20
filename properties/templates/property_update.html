@@ -1,7 +1,13 @@
 {% load widget_tweaks %}
+
 <html>
+{% include 'header.html' %}
+<title>Update Property</title>
 <body>
+<br><br><br><br><br><br><br><br>
+<center>
 <form method="POST" enctype="multipart/form-data">
+    {% if property.errors %}<li>{{ property.label }}: {{ property.errors|striptags }}</li>{% endif %}
     {% csrf_token %}
 Title:<input type="text" value="{{property.property_title}}" name="property_title"><br>
 Address:<input type="text" value="{{property.property_address}}" name="property_address"><br>
@@ -16,5 +22,6 @@ Description:<input type="text" value="{{property.property_description}}" name="p
 Upload Images:<input type="file" multiple value="{{property_images}}" name="property_images"><br>
 <input type="submit" value="Update Property" name="update_property">
 </form>
+    </center>
 </body>
 </html>

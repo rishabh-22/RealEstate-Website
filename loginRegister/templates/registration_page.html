@@ -5,6 +5,7 @@
 <html lang="en">
 
 <head>
+
     <!-- Required meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -27,9 +28,87 @@
 
     <!-- Main CSS-->
     <link href="{% static 'reg/css/main.css' %}" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="{% static 'homepage/style.css' %}">
 </head>
 
 <body>
+
+ <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header-area">
+            <div class="h-100 d-md-flex justify-content-between align-items-center">
+                <div class="email-address">
+                    <a href="mailto:contact@southtemplate.com">contact@tothenew.com</a>
+                </div>
+                <div class="phone-number d-flex">
+                    <div class="icon">
+                        <img src="{% static 'img/icons/phone-call.png' %}" alt="">
+                    </div>
+                    <div class="number">
+                        <a href="tel:+91 954 099 3336">+91 954 099 3336</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header Area -->
+        <div class="main-header-area" id="stickyHeader">
+            <div class="classy-nav-container breakpoint-off">
+                <!-- Classy Menu -->
+                <nav class="classy-navbar justify-content-between" id="southNav">
+
+                    <!-- Logo -->
+                    <a class="nav-brand" href="#"><img src="{% static 'homepage/img/core-img/logo.png' %}" alt=""></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+
+                        <!-- close btn -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul>
+                                <li><a href="{% url 'homepage' %}">Home</a></li>
+
+                                <li><a href="#">Listed Properties</a></li>
+                                {% if request.session.logged_in %}
+                                <li><a class="waves-effect waves-dark" href="{% url 'dashboard' %}">
+                                  {% if request.session.is_seller %}
+                                    {{request.user.first_name}}|Seller
+                                {% else %}
+                                    {{request.user.first_name}}|Buyer
+                                {% endif %}
+                            </a></li>
+                                {% if request.session.is_seller %}
+                            <li><a class="waves-effect waves-dark" href="{% url 'property_add' %}">Post Property</a></li>
+                        {% endif %}
+                            <li><a class="waves-effect waves-dark" href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a class="waves-effect waves-dark" href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+
+<br><br>
+
+
     <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
         <div class="wrapper wrapper--w680">
             <div class="card card-1">
@@ -42,50 +121,53 @@
                         {% endfor %}
                         <br>
                         {% csrf_token %}
-                        <div class="input-group">
-                            Username: <br><br>
-                            {{form.username}}
-                        </div>
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    First Name: <br><br>
-                                    {{form.first_name}}
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group" >
-                                    Last Name: <br><br>
-                                    {{form.last_name}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-group">
-                           Email ID: <br><br>
-                            {{form.email_id}}
-                        </div>
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    Password: <br><br>
-                                    {{form.password1}}
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group" >
-                                    Confirm Password: <br><br>
-                                    {{form.password2}}
-                                </div>
-                            </div>
-                            <div class="form-check-input">
-                           Seller: <br><br>
-                            {{form.is_seller}}
-                            </div>
-                            <div class="input-group">
-                            Profile Pic: <br><br>
-                            {{form.profile_pic}}
-                        </div>
-                        </div>
+
+                        {{form|crispy}}
+
+<!--                        <div class="input-group">-->
+<!--                            Username: <br><br>-->
+<!--                            {{form.username}}-->
+<!--                        </div>-->
+<!--                        <div class="row row-space">-->
+<!--                            <div class="col-2">-->
+<!--                                <div class="input-group">-->
+<!--                                    First Name: <br><br>-->
+<!--                                    {{form.first_name}}-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-2">-->
+<!--                                <div class="input-group" >-->
+<!--                                    Last Name: <br><br>-->
+<!--                                    {{form.last_name}}-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="input-group">-->
+<!--                           Email ID: <br><br>-->
+<!--                            {{form.email_id}}-->
+<!--                        </div>-->
+<!--                        <div class="row row-space">-->
+<!--                            <div class="col-2">-->
+<!--                                <div class="input-group">-->
+<!--                                    Password: <br><br>-->
+<!--                                    {{form.password1}}-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-2">-->
+<!--                                <div class="input-group" >-->
+<!--                                    Confirm Password: <br><br>-->
+<!--                                    {{form.password2}}-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="form-check-input">-->
+<!--                           Seller: <br><br>-->
+<!--                            {{form.is_seller}}-->
+<!--                            </div>-->
+<!--                            <div class="input-group">-->
+<!--                            Profile Pic: <br><br>-->
+<!--                            {{form.profile_pic}}-->
+<!--                        </div>-->
+<!--                        </div>-->
                         <div class="p-t-20">
                             <button class="btn btn--radius btn--green" type="submit">Submit</button>
                         </div>
