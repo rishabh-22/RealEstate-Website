@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,20 +8,21 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="{% static 'homepage/style.css' %}">
 <style type="text/css">
+
 </style>
+    {% include 'header.html' %}
 </head>
+<body>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
 <div style="top:100px left:100px">
 
     <div id="myCarousel" class="carousel slide" data-ride="carousel" style="border:1px solid black; width:500px;height:200px;margin:0 auto; ">
-<!-- Indicators -->
-<ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-    <li data-target="#myCarousel" data-slide-to="3"></li>
-    <li data-target="#myCarousel" data-slide-to="4"></li>
-</ol>
+
 
 <!-- Wrapper for slides -->
 <div class="carousel-inner" role="listbox" >
@@ -46,29 +48,63 @@
     </a>
 </div>
 </div>
-
-
 </div>
-Title:{{property.property_title}}<br>
-    Address:{{property.property_address}}<br>
-    PIN:{{property.property_pin}}<br>
-    Price:{{property.property_price}}<br>
-    No. of bedrooms:{{property.property_bedrooms}}<br>
-    No. of bathrooms:{{property.property_bathrooms}}<br>
-    Area:{{property.property_sqFeet}}sq feet<br>
-    Lot Size:{{property.property_lotSize}}<br>
-    Garages:{{property.property_garage}}<br>
-    Description:{{property.property_description}}<br>
+<br><br><br><br><br><br><br>
 
-<!--{% block content %}-->
-<!--  <form method="get" action="{% url 'search' %}">-->
-<!--    {{ filter.form.as_p }}-->
-<!--    <input type="submit">Search</input>-->
-<!--  </form>-->
-<!--  <ul>-->
-<!--  {% for property in filter.qs %}-->
-<!--    <li>{{ property.property_title }}</li>-->
-<!--  {% endfor %}-->
-<!--  </ul>-->
-<!--{% endblock %}-->
+
+<center>
+<div class="property-content">
+								<h2>{{property.property_title}}</h2>
+								<p class="location"><img src="{% static 'homepage/img/icons/location.png' %}" alt="">{{property.property_address}},</p>
+                                <h4> {{property.property_city}}, {{property.property_state}} </h4>
+                                <h4> {{property.property_pin}} </h4>
+                                <p>Description: {{property.property_description}}</p>
+                                <div class="property-meta-data justify-content-between">
+                                <div class="new-tag">
+                                    <img src="{% static 'homepage/img/icons/new.png' %}" alt="">
+                                    <span>Price: {{property.property_price}}</span>
+                                </div>
+                                    <br>
+                                <div class="space">
+                                    <img src="{% static 'homepage/img/icons/space.png' %}" alt="">
+                                    <span>Bedrooms: {{property.property_bedrooms}}</span>
+                                </div>
+                                    <br>
+                                <div class="bathroom">
+                                    <img src="{% static 'homepage/img/icons/bathtub.png' %}" alt="">
+                                    <span>Bathrooms: {{property.property_bathrooms}}</span>
+                                </div>
+                                    <br>
+                                <div class="garage">
+                                    <img src="{% static 'homepage/img/icons/garage.png' %}" alt="">
+                                    <span>Garages: {{property.property_garage}}</span>
+                                </div>
+                                    <br>
+
+                                <div class="space">
+                                <img src="{% static 'homepage/img/icons/space.png' %}" alt="">
+                                <span>Area: {{property.property_sqFeet}}sqft</span>
+                                </div>
+                                    <br><br>
+                                </div>
+</center>
+
+
+
+<center>
+{% if logged_in %}
+    {% if is_buyer %}
+        {% if no_query_made %}
+            {% include 'enquiry_form.html' %}
+        {% else %}
+            You have already inquired for this form
+        {% endif %}
+    {% endif %}
+{% else %}
+    <h3>Login To Post A Query</h3>
+    <h1><button class="btn btn-default" style="width:280px"><a href="{% url 'login' %}"><input type="submit" value="Login" style="decoration:none"></a></button></h1>
+{% endif %}
+</center>
+<br><br>
+</body>
 </html>

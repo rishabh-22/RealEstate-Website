@@ -1,7 +1,12 @@
 <html>
 {% load widget_tweaks %}
+{% include 'header.html' %}
 <body>
+<title>Add New Property</title>
+<br><br><br><br><br><br><br><br>
+<center>
 <form method="POST" enctype="multipart/form-data">
+    {% if property_form.errors %}<li>{{ property_form.label }}: {{ property_form.errors|striptags }}</li>{% endif %}
     {% csrf_token %}
     Title:{% render_field property_form.property_title %}<br>
     City: {% render_field property_form.property_city %}<br>
@@ -15,9 +20,10 @@
     Lot Size:{% render_field property_form.property_lotSize %}<br>
     Garage:{% render_field property_form.property_garage %}<br>
     Description:{% render_field property_form.property_description %}<br>
-    Upload Images:{% render_field property_image.Property_Images multiple=True %}<br>
+    Upload Images:{% render_field property_images.Property_Images multiple=True %}<br>
 
     <input type="submit" value="Submit Property">
 </form>
+    </center>
 </body>
 </html>>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section class="home_banner_area">
+           	<div class="container box_1620">
+           		<div class="banner_inner d-flex align-items-center">
+					<div class="banner_content">
+						<div class="media">
+							<div class="d-flex">
+								<img src="{{user.profile_pic.url}}" height="500" width="500" style="border-radius:50%" alt="">
+							</div>
+							<div class="media-body">
+								<div class="personal_text">
+
+									<h3>{{user.first_name}} {{user.last_name}}</h3>
+									<h4>{{user.username}}</h4>
+                                    <h4>SELLER</h4>
+									<ul class="list basic_info">
+<!--										<li><a href="#"><i class="lnr lnr-calendar-full"></i> 31st December, 1992</a></li>-->
+										<li><a href="#"><i class="lnr lnr-phone-handset"></i> {{user.phone_num}}</a></li>
+										<li><a href="#"><i class="lnr lnr-envelope"></i>{{user.email_id}}</a></li>
+<!--										<li><a href="#"><i class="lnr lnr-home"></i> Santa monica bullevard</a></li>-->
+                                        <li><p>{{user.description}}</p></li>
+									</ul>
+<!--									<ul class="list personal_social">-->
+<!--										<li><a href="#"><i class="fa fa-facebook"></i></a></li>-->
+<!--										<li><a href="#"><i class="fa fa-twitter"></i></a></li>-->
+<!--										<li><a href="#"><i class="fa fa-linkedin"></i></a></li>-->
+<!--									</ul>-->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </section>
+</body>
+</html>
